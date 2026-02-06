@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Liazon Corp | Contact</title>
+    <meta name="description" content="Contact Liazon Corp for corporate inquiries." />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">Liazon Corp</div>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-header">
+        <h1>Contact us</h1>
+        <p>Share a few details and we will be in touch within one business day.</p>
+      </section>
+
+      <section class="content">
+        <form class="contact-form" id="contact-form">
+          <label>
+            Full name
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label>
+            Work email
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            Company
+            <input type="text" name="company" autocomplete="organization" />
+          </label>
+          <label>
+            How can we help?
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+          <button class="button" type="submit">Send message</button>
+          <p class="form-note" id="form-note" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Liazon Corp. All rights reserved.</span>
+    </footer>
+
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>
