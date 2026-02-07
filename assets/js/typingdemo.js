@@ -18,12 +18,14 @@ let converex = 0;
 let convertext = 0;
 let nextexample = false;
 let doneex = [];
-findnewex();
 
 function findnewex() {
-    converex = Math.floor(Math.random() * examples.length)
-    if (converex in doneex) {findnewex()}
+    do {
+        converex = Math.floor(Math.random() * examples.length);
+    } while (doneex.includes(converex));
 }
+
+findnewex();
 
 
 async function typetext() {
@@ -80,7 +82,6 @@ async function typetext() {
         doneex.push(converex);
         if (doneex.length == examples.length) { doneex = [converex]; }
         findnewex();
-
     }
     talking += 1
     setTimeout(typetext, 1500);
