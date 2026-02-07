@@ -17,8 +17,9 @@ if (form && note) {
 }
 
 // === Contact form handler ===
+// === Contact form handler ===
 (() => {
-  const API_URL = "https://7ofigcp921.execute-api.us-east-1.amazonaws.com/contact";
+  const API_URL = "https://7ofigcp921.execute-api.us-east-1.amazonaws.com/contact"; // <-- replace if different
 
   const form = document.getElementById("contact-form");
   if (!form) return;
@@ -37,12 +38,15 @@ if (form && note) {
     button.disabled = true;
     button.textContent = "Sending…";
 
+    // Use FormData to avoid form.name / form.email collisions
+    const fd = new FormData(form);
+
     const payload = {
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      company: form.company.value.trim(),
-      message: form.message.value.trim(),
-      website: form.website.value.trim() // honeypot
+      name: (fd.get("name") || "").toString().trim(),
+      email: (fd.get("email") || "").toString().trim(),
+      company: (fd.get("company") || "").toString().trim(),
+      message: (fd.get("message") || "").toString().trim(),
+      website: (fd.get("website") || "").toString().trim() // honeypot (optional)
     };
 
     try {
@@ -58,11 +62,12 @@ if (form && note) {
         form.reset();
         setNote("Thanks! Your message has been sent.");
       } else {
-        console.error("API error", res.status, data);
-        setNote("Something went wrong. Please try again shortly.", false);
+        console.error("API error:", res.status, data);
+        // This will show Lambda's exact validation error like "Invalid email"
+        setNote(`Error: ${data.error || "Request failed"}`, false);
       }
     } catch (err) {
-      console.error("Network error", err);
+      console.error("Network error:", err);
       setNote("Network error. Please try again.", false);
     } finally {
       button.disabled = false;
@@ -70,4 +75,3 @@ if (form && note) {
     }
   });
 })();
-
