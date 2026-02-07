@@ -45,6 +45,11 @@ body {
   gap: 5px;
 }
 
+.centeredcontent {
+  display: flex;
+  justify-content: center;
+}
+
 .site-nav {
   display: flex;
   gap: 20px;
