@@ -1,54 +1,22 @@
 const examples = [
-  [
-    "Iris, can you find 30 minutes with Alice sometime next week?",
-    "Sure — do you have any day or time preferences?"
-  ],
-  [
-    "Iris, please schedule a quick sync with Alice.",
-    "Got it. How long should it be?",
-    "Let’s do 30 minutes."
-  ],
-  [
-    "Iris, can you move tomorrow’s 2pm with Alice?",
-    "No problem — should I look for something later this week?",
-    "Yes, anything after Wednesday works."
-  ],
-  [
-    "Iris, schedule a call with Alice when we’re both free.",
-    "I’ll propose a few options and see what works best.",
-    "Sounds good.",
-    "Thursday morning works for me.",
-    "Great — I’ll confirm Thursday morning and send the invite."
-  ],
-  [
-    "Iris, can you coordinate a time with Alice this week?",
-    "Sure — do you want me to prioritize speed or best overlap?",
-    "Speed, please."
-  ],
-  [
-    "Iris, please reschedule my meeting with Alice.",
-    "Okay — same length and participants?",
-    "Yes.",
-    "I can’t do Friday anymore.",
-    "Thanks — I’ll avoid Friday and propose new options."
-  ],
-  [
-    "Iris, set up a 1:1 with Alice next week.",
-    "Understood. Any days to avoid?",
-    "Avoid Tuesday."
-  ],
-  [
-    "Iris, can you handle scheduling with Alice without looping me back in?",
-    "Yes — I’ll take it from here and confirm once it’s locked."
-  ]
+["Iris, schedule a meeting for noon tomorrow.", "Scheduled a meeting for 12pm ET."],
+["Iris, schedule a meeting for us.", "Sure thing, provide your availability.", "Any time afternoon next week should work.", "Tuesday or Wednesday after 3pm works for me.", "Great, I scheduled a meeting for Wednesday, at 3pm."],
+["Iris, schedule a meeting on Monday around 2ish.","Please clarify: 2am or 2pm?","2pm.","           ","Scheduled a meeting for 2pm ET."]
 ];
-
 
 const usersaid = document.getElementById("usersaid");
 const irissaid = document.getElementById("irissaid");
 const user2said = document.getElementById("usersaid2");
-const user2card = document.getElementById("usercard2");
 
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+async function startup() {
+    await delay(500);
+}
+startup();
 let talking = 0;
 let converex = 0;
 let convertext = 0;
@@ -61,9 +29,8 @@ function findnewex() {
     } while (doneex.includes(converex));
 }
 
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+findnewex();
+
 
 async function typetext() {
     if (nextexample) {
@@ -71,7 +38,6 @@ async function typetext() {
             usersaid.style.opacity -= 0.05;
             irissaid.style.opacity -= 0.05;
             user2said.style.opacity -= 0.05;
-            if (examples[converex].length < 4) { user2card.style.opacity -= (user2card.style.opacity == 0) ? 0 : 0.05; } else { user2card.style.opacity += (user2card.style.opacity == 1) ? 0 : 0.5; }
             await delay(50);
         }
         usersaid.innerHTML = "<br>";
@@ -124,6 +90,4 @@ async function typetext() {
     talking += 1
     setTimeout(typetext, 1500);
 }
-findnewex();
-if (examples[converex].length > 3) { user2card.style.opacity = 1; } else { user2card.style.opacity = 0; }
 typetext();
