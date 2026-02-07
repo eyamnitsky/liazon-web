@@ -102,6 +102,11 @@ main {
   flex-wrap: wrap;
 }
 
+.inline-h2 h2 {
+  display: inline;
+  margin: 0;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
