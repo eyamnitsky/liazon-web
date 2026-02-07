@@ -1,7 +1,7 @@
 const examples = [
 ["Iris, schedule a meeting for noon tomorrow.", "Scheduled a meeting for 12pm ET."],
 ["Iris, schedule a meeting for us.", "Sure thing, provide your availability.", "Any time afternoon next week should work.", "Tuesday or Wednesday after 3pm works for me.", "Great, I scheduled a meeting for Wednesday, at 3pm."],
-["Iris, schedule a meeting on Monday around 2ish.","Please clarify: 2am or 2pm?","2pm.","           ","Scheduled a meeting for 2pm ET."]
+["Iris, schedule a meeting on Monday around 2ish.","Please clarify: 2am or 2pm?","2pm.","Works for me!","Scheduled a meeting for 2pm ET."]
 ];
 
 const usersaid = document.getElementById("usersaid");
