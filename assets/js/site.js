@@ -41,13 +41,22 @@ if (form && note) {
     // Use FormData to avoid form.name / form.email collisions
     const fd = new FormData(form);
 
+    const nameEl = form.querySelector('input[name="name"]');
+    const emailEl = form.querySelector('input[name="email"]');
+    const companyEl = form.querySelector('input[name="company"]');
+    const messageEl = form.querySelector('textarea[name="message"]');
+    const websiteEl = form.querySelector('input[name="website"]'); // optional honeypot
+
     const payload = {
-      name: (fd.get("name") || "").toString().trim(),
-      email: (fd.get("email") || "").toString().trim(),
-      company: (fd.get("company") || "").toString().trim(),
-      message: (fd.get("message") || "").toString().trim(),
-      website: (fd.get("website") || "").toString().trim() // honeypot (optional)
+      name: (nameEl?.value || "").trim(),
+      email: (emailEl?.value || "").trim(),
+      company: (companyEl?.value || "").trim(),
+      message: (messageEl?.value || "").trim(),
+      website: (websiteEl?.value || "").trim(),
     };
+
+    console.log("Submitting payload:", payload); // <-- keep this for one test
+
 
     try {
       const res = await fetch(API_URL, {
