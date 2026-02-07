@@ -1,4 +1,4 @@
-examples = [["Iris, schedule a meeting for noon tomorrow.", "Scheduled a meeting for 12pm ET."],["Iris, schedule a meeting for us.", "Sure thing, provide your availability.", "Any time afternoon next week should work."]];
+examples = [["Iris, schedule a meeting for noon tomorrow.", "Scheduled a meeting for 12pm ET."],["Iris, schedule a meeting for us.", "Sure thing, provide your availability.", "Any time afternoon next week should work."],["Iris, schedule a meeting on Monday around 2ish.","Please clarify: 2am or 2pm?","2pm."]];
 
 const usersaid = document.getElementById("usersaid");
 const irissaid = document.getElementById("irissaid");
@@ -10,19 +10,33 @@ function delay(ms) {
 
 
 async function startup() {
-    await delay(1000);
+    await delay(500);
 }
+startup();
 let talking = 0;
 let converex = 0;
 let convertext = 0;
+usersaid.style.opacity = 1;
+irissaid.style.opacity = 1;
+usersaid2.style.opacity = 1;
 let nextexample = false;
 
 
 async function typetext() {
     if (nextexample) {
+        for (let i = 0; i < 20; i++) {
+            usersaid.style.opacity -= 0.05;
+            irissaid.style.opacity -= 0.05;
+            usersaid2.style.opacity -= 0.05;
+            await delay(50);
+        }
         usersaid.innerHTML = "<br>";
         irissaid.innerHTML = "<br>";
         usersaid2.innerHTML = "<br>";
+        usersaid.style.opacity = 1;
+        irissaid.style.opacity = 1;
+        usersaid2.style.opacity = 1;
+        await delay(1000);
     }
     nextexample = false;
     if (talking == 0) { usersaid.innerHTML = "<br>"; }
