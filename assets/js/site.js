@@ -11,76 +11,75 @@ if (form && note) {
       return;
     }
 
+    (() => {
+      const API_URL = "https://7ofigcp921.execute-api.us-east-1.amazonaws.com/contact"; // <-- replace if different
+
+      const form = document.getElementById("contact-form");
+      if (!form) return;
+
+      const note = document.getElementById("form-note");
+      const button = form.querySelector("button[type='submit']");
+
+      function setNote(msg, ok = true) {
+        note.textContent = msg;
+        note.style.color = ok ? "#2e7d32" : "#b00020";
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        setNote("");
+        button.disabled = true;
+        button.textContent = "Sending…";
+
+        // Use FormData to avoid form.name / form.email collisions
+        const fd = new FormData(form);
+
+        const nameEl = form.querySelector('input[name="name"]');
+        const emailEl = form.querySelector('input[name="email"]');
+        const companyEl = form.querySelector('input[name="company"]');
+        const messageEl = form.querySelector('textarea[name="message"]');
+        const websiteEl = form.querySelector('input[name="website"]'); // optional honeypot
+
+        const payload = {
+          name: (nameEl?.value || "").trim(),
+          email: (emailEl?.value || "").trim(),
+          company: (companyEl?.value || "").trim(),
+          message: (messageEl?.value || "").trim(),
+          website: (websiteEl?.value || "").trim(),
+        };
+
+        console.log("Submitting payload:", payload); // <-- keep this for one test
+
+
+        try {
+          const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json().catch(() => ({}));
+
+          if (res.ok && data.ok) {
+            form.reset();
+            setNote("Thanks! Your message has been sent.");
+          } else {
+            console.error("API error:", res.status, data);
+            // This will show Lambda's exact validation error like "Invalid email"
+            setNote(`Error: ${data.error || "Request failed"}`, false);
+          }
+        } catch (err) {
+          console.error("Network error:", err);
+          setNote("Network error. Please try again.", false);
+        } finally {
+          button.disabled = false;
+          button.textContent = "Send message";
+        }
+      });
+    })();
+
+
     note.textContent = "Thanks, we have received your request.";
     form.reset();
   });
 }
-
-// === Contact form handler ===
-// === Contact form handler ===
-(() => {
-  const API_URL = "https://7ofigcp921.execute-api.us-east-1.amazonaws.com/contact"; // <-- replace if different
-
-  const form = document.getElementById("contact-form");
-  if (!form) return;
-
-  const note = document.getElementById("form-note");
-  const button = form.querySelector("button[type='submit']");
-
-  function setNote(msg, ok = true) {
-    note.textContent = msg;
-    note.style.color = ok ? "#2e7d32" : "#b00020";
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    setNote("");
-    button.disabled = true;
-    button.textContent = "Sending…";
-
-    // Use FormData to avoid form.name / form.email collisions
-    const fd = new FormData(form);
-
-    const nameEl = form.querySelector('input[name="name"]');
-    const emailEl = form.querySelector('input[name="email"]');
-    const companyEl = form.querySelector('input[name="company"]');
-    const messageEl = form.querySelector('textarea[name="message"]');
-    const websiteEl = form.querySelector('input[name="website"]'); // optional honeypot
-
-    const payload = {
-      name: (nameEl?.value || "").trim(),
-      email: (emailEl?.value || "").trim(),
-      company: (companyEl?.value || "").trim(),
-      message: (messageEl?.value || "").trim(),
-      website: (websiteEl?.value || "").trim(),
-    };
-
-    console.log("Submitting payload:", payload); // <-- keep this for one test
-
-
-    try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await res.json().catch(() => ({}));
-
-      if (res.ok && data.ok) {
-        form.reset();
-        setNote("Thanks! Your message has been sent.");
-      } else {
-        console.error("API error:", res.status, data);
-        // This will show Lambda's exact validation error like "Invalid email"
-        setNote(`Error: ${data.error || "Request failed"}`, false);
-      }
-    } catch (err) {
-      console.error("Network error:", err);
-      setNote("Network error. Please try again.", false);
-    } finally {
-      button.disabled = false;
-      button.textContent = "Send message";
-    }
-  });
-})();
