@@ -133,6 +133,32 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.chat-layout {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  margin-bottom: 40px;
+}
+
+.chat-left {
+  display: grid;
+  gap: 24px;
+}
+
+.chat-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  animation: rise 0.7s ease;
+}
+
+.chat-right.hero {
+  margin-bottom: 0;
+  height: 100%;
+}
+
 .grid article,
 .page-header,
 .content {
@@ -255,5 +281,13 @@ main {
 
   .hero {
     padding: 32px;
+  }
+
+  .chat-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-right.hero {
+    height: auto;
   }
 }
