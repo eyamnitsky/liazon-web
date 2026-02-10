@@ -245,6 +245,78 @@ main {
   font-family: inherit;
 }
 
+.feature-list {
+  display: grid;
+  gap: 20px;
+}
+
+.feature-block {
+  padding: 22px 24px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: #f9fbff;
+}
+
+.feature-block h2 {
+  margin: 0 0 8px;
+}
+
+.feature-block p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.feature-block .value {
+  margin-top: 10px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 1rem;
+  min-width: 520px;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.pricing-table thead th {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.pricing-table thead th:nth-child(2),
+.pricing-table thead th:nth-child(3) {
+  text-align: center;
+}
+
+.pricing-table td.plan-check,
+.pricing-table td.plan-empty {
+  text-align: center;
+  font-weight: 700;
+}
+
+.pricing-table td.plan-check {
+  color: var(--accent);
+}
+
+.pricing-table td.plan-empty {
+  color: var(--muted);
+}
+
 .form-note {
   min-height: 20px;
   color: var(--muted);
