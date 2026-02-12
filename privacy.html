@@ -26,7 +26,7 @@
     <main>
       <section class="page-header">
         <h1>Privacy Policy</h1>
-        <p class="policy-meta">Effective Date: February 5, 2026</p>
+        <p class="policy-meta">Effective Date: February 12, 2026</p>
       </section>
 
       <section class="content">
@@ -50,7 +50,7 @@
         <ul>
           <li>Name and email address</li>
           <li>Account preferences and configuration settings</li>
-          <li>Calendar availability and event metadata</li>
+          <li>Calendar free/busy availability (if calendar integration is enabled)</li>
         </ul>
 
         <h3>1.2 Email and Message Data</h3>
@@ -77,15 +77,20 @@
 
         <h3>1.3 Information from Third-Party Services</h3>
         <p>
-          If you connect third-party services (such as email or calendar
-          providers), we may receive limited information required to operate the
-          Service, including:
+          If you connect third-party services (such as email providers or Google
+          Calendar), we receive only the minimum data required to provide
+          scheduling functionality, including:
         </p>
         <ul>
-          <li>Email headers and metadata</li>
-          <li>Calendar availability and event details</li>
+          <li>Email headers and metadata (for connected email providers)</li>
+          <li>Calendar free/busy status (availability only)</li>
+          <li>Encrypted OAuth tokens needed to maintain the connection</li>
         </ul>
-        <p>We access the minimum data necessary to perform the requested functionality.</p>
+        <p>
+          We do not access or store calendar event titles, descriptions,
+          attendee lists, attachments, or other event content from your personal
+          calendar data.
+        </p>
 
         <h3>1.4 Automatically Collected Information</h3>
         <p>We may collect limited technical information such as:</p>
@@ -96,6 +101,22 @@
         </ul>
         <p>This information is used for security, reliability, and abuse prevention.</p>
 
+        <h3>1.5 Google Calendar and Google Meet Integration</h3>
+        <p>
+          Google Calendar integration is optional and enabled only with your
+          explicit consent through Google OAuth, as clearly outlined in the
+          Google OAuth consent screen.
+        </p>
+        <p>
+          If you choose to add Google Meet to an invite, Liazon sends only the
+          data required to create or update the invite and attach a Meet link.
+        </p>
+        <p>
+          You may disconnect Google Calendar at any time in Liazon settings or
+          by revoking Liazon access in your Google account permissions. Once
+          disconnected, Liazon will stop new calendar access.
+        </p>
+
         <hr />
 
         <h2>2. How We Use Information</h2>
@@ -103,6 +124,8 @@
         <ul>
           <li>Provide and operate the Service</li>
           <li>Facilitate scheduling and meeting coordination</li>
+          <li>Check free/busy availability to avoid scheduling conflicts</li>
+          <li>Create or update calendar invites and optionally add Google Meet links when user-requested</li>
           <li>Generate user-initiated email responses</li>
           <li>Maintain conversation context using encrypted metadata</li>
           <li>Detect, prevent, and investigate abuse or misuse</li>
@@ -110,6 +133,11 @@
           <li>Comply with legal obligations</li>
         </ul>
         <p>We do not use personal data for advertising, profiling, or marketing purposes.</p>
+        <p>
+          We do not use Google Workspace data for advertising. Access and use
+          of Google user data is limited to providing and improving user-facing
+          scheduling features.
+        </p>
 
         <hr />
 
