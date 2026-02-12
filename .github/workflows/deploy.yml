@@ -24,7 +24,7 @@ jobs:
 
       - name: Sync to S3
         run: |
-          aws s3 sync . s3://www.liazon.cc \
+          aws s3 sync . s3://www.liazon.ai \
             --delete \
             --exclude ".git/*" \
             --exclude ".github/*"
@@ -32,5 +32,5 @@ jobs:
       - name: Invalidate CloudFront
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id "EBSN5YEFMRRQ4" \
+            --distribution-id "EJENZS2ECEK" \
             --paths "/*"
