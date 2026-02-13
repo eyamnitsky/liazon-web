@@ -83,6 +83,46 @@ main {
   animation: rise 0.7s ease;
 }
 
+.hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-areas:
+    "title title"
+    "copy demo";
+  gap: 24px;
+  align-items: start;
+}
+
+.hero-title {
+  grid-area: title;
+  margin: 0;
+}
+
+.hero-copy {
+  grid-area: copy;
+}
+
+.hero-demo {
+  grid-area: demo;
+}
+
+.hero-demo .chat-layout {
+  margin-bottom: 0;
+  grid-template-columns: 1fr;
+}
+
+.hero-demo .chat-left {
+  grid-template-columns: 1fr;
+}
+
+.hero-demo .chat-card {
+  padding: 22px 22px;
+}
+
+.hero-demo .chat-right {
+  height: auto;
+}
+
 .hero h1 {
   font-size: clamp(2.4rem, 4vw, 3.4rem);
   margin-bottom: 16px;
@@ -94,6 +134,51 @@ main {
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 24px;
+}
+
+.hero .hero-lede {
+  margin-bottom: 14px;
+}
+
+.hero-bullets {
+  list-style: none;
+  max-width: 560px;
+  margin: 0 0 24px;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hero-bullets li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.hero-bullets li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.hero-jumps {
+  margin-top: 16px;
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.hero-jumps a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero-jumps a:hover {
+  text-decoration: underline;
 }
 
 .cta-row {
@@ -159,6 +244,23 @@ main {
   height: 100%;
 }
 
+.chat-right {
+  height: 100%;
+}
+
+.chat-line {
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.chat-speaker {
+  color: var(--ink);
+  font-weight: 800;
+  margin-right: 6px;
+}
+
 .grid article,
 .page-header,
 .content {
@@ -167,6 +269,10 @@ main {
   padding: 28px;
   box-shadow: var(--shadow);
   animation: rise 0.7s ease;
+}
+
+.content {
+  margin-bottom: 40px;
 }
 
 .page-header {
@@ -223,6 +329,107 @@ main {
 
 .content h2 {
   margin-top: 20px;
+}
+
+.how-it-works {
+  margin-bottom: 40px;
+}
+
+.how-it-works h2 {
+  margin-top: 0;
+}
+
+.how-steps {
+  margin-top: 18px;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.how-step {
+  border: 1px solid var(--border);
+  background: #f9fbff;
+  border-radius: 16px;
+  padding: 22px 24px;
+}
+
+.how-step h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.how-step p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+.how-note {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.what-makes-different h2 {
+  margin-top: 0;
+}
+
+.what-makes-different p + p {
+  margin-top: 14px;
+}
+
+.faq .faq-list {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.faq {
+  margin-bottom: 40px;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #f9fbff;
+  overflow: hidden;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 18px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item[open] summary {
+  border-bottom: 1px solid var(--border);
+  background: rgba(15, 92, 215, 0.06);
+}
+
+.faq-answer {
+  padding: 0 18px 16px;
+}
+
+.faq-answer p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.faq-answer a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.faq-answer a:hover {
+  text-decoration: underline;
 }
 
 .contact-form {
@@ -353,6 +560,14 @@ main {
 
   .hero {
     padding: 32px;
+  }
+
+  .hero-split {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "copy"
+      "demo";
   }
 
   .chat-layout {

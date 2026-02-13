@@ -3,8 +3,120 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Liazon | Home</title>
-    <meta name="description" content="Liazon, LLC - The home of Iris." />
+    <title>Liazon | AI Email Scheduling Assistant</title>
+    <meta
+      name="description"
+      content="CC Iris into email threads and she schedules meetings automatically: reads availability, coordinates attendees, handles rescheduling, and books the meeting with Google and Microsoft calendar support."
+    />
+    <link rel="canonical" href="https://www.liazon.ai/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.liazon.ai/#organization",
+            "name": "Liazon",
+            "url": "https://www.liazon.ai",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.liazon.ai/assets/images/liazonicon.png"
+            }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "@id": "https://www.liazon.ai/#software",
+            "name": "Liazon",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "url": "https://www.liazon.ai",
+            "description": "AI email scheduling assistant that coordinates meetings inside email conversations: reads availability, negotiates across attendees, handles rescheduling, and books meetings without scheduling links.",
+            "offers": [
+              {
+                "@type": "Offer",
+                "name": "Free",
+                "url": "https://www.liazon.ai/pricing.html"
+              },
+              {
+                "@type": "Offer",
+                "name": "Pro",
+                "url": "https://www.liazon.ai/pricing.html"
+              }
+            ]
+          },
+	          {
+	            "@type": "FAQPage",
+	            "@id": "https://www.liazon.ai/#faq",
+	            "mainEntity": [
+	              {
+	                "@type": "Question",
+	                "name": "How does Iris read availability in email?",
+	                "acceptedAnswer": {
+	                  "@type": "Answer",
+	                  "text": "Iris parses availability written in plain English and matches it against connected calendars. She can work with constraints like “after 3,” “any afternoon,” and “not Tuesday.” See How it works for the full flow."
+	                }
+	              },
+	              {
+	                "@type": "Question",
+	                "name": "Does Iris support Google Calendar and Outlook?",
+	                "acceptedAnswer": {
+	                  "@type": "Answer",
+	                  "text": "Yes. Iris supports Google and Microsoft calendars (Outlook/365), which makes it easier to coordinate across organizations. She is built for calendar coordination, not just sending a link."
+	                }
+	              },
+              {
+                "@type": "Question",
+                "name": "Can it handle rescheduling?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Meeting rescheduling is a first-class flow: reply in the same thread and Iris re-coordinates until a new time is confirmed and booked. Learn more on Meeting rescheduling software."
+                }
+	              },
+	              {
+	                "@type": "Question",
+	                "name": "How does Iris manage time zones?",
+	                "acceptedAnswer": {
+	                  "@type": "Answer",
+	                  "text": "Iris handles time zones automatically during coordination and confirmation so proposed times remain consistent for each attendee. This helps avoid “is that your time or mine?” confusion in distributed threads."
+	                }
+	              },
+	              {
+	                "@type": "Question",
+	                "name": "Does it require scheduling links?",
+	                "acceptedAnswer": {
+	                  "@type": "Answer",
+	                  "text": "No. Iris coordinates scheduling inside the email thread, so you do not need scheduling links. Learn more on Schedule meetings without links."
+	                }
+	              },
+              {
+                "@type": "Question",
+                "name": "Is email data stored?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Liazon is designed to coordinate scheduling from the email thread and connected calendars. If you have specific retention or security requirements, contact us and we can walk through how your data is handled."
+                }
+              },
+	              {
+	                "@type": "Question",
+	                "name": "Can it coordinate multiple participants?",
+	                "acceptedAnswer": {
+	                  "@type": "Answer",
+	                  "text": "Yes. Iris negotiates across participants, tracks confirmations, and keeps options consistent as replies come in. Iris is built for multi-party scheduling inside email conversations."
+	                }
+	              },
+              {
+                "@type": "Question",
+                "name": "What happens if someone replies vaguely?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Iris can interpret ambiguous replies like “this works” or “these are fine” by mapping them to the options currently being discussed. If a reply is genuinely unclear, Iris asks a short follow-up to confirm."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
     <link rel="stylesheet" href="assets/css/styles.css"/>
     <link rel="icon" type="image/png" href="assets/images/liazonicon.png">
   </head>
@@ -25,57 +137,175 @@
 
     <main>
       <section class="hero">
-        <h1>Meet Iris.</h1>
-        <p>
-          Your AI powered meeting organizer.
-        </p>
-        <div class="cta-row">
-          <a class="button" href="contact.html">Talk to us</a>
-          <a class="button ghost" href="about.html">Our story</a>
-        </div>
-      </section>
+        <div class="hero-split">
+          <h1 class="hero-title">AI that schedules meetings inside your email conversations</h1>
+          <div class="hero-copy">
+            <p class="hero-lede">
+              CC Iris on the thread and she coordinates availability, handles meeting rescheduling, and books the meeting automatically.
+              No scheduling links, no tab switching, just a faster way to schedule meetings inside email.
+            </p>
+            <ul class="hero-bullets">
+              <li>No scheduling links</li>
+              <li>Multi-party coordination across participants</li>
+              <li>Google and Microsoft calendar support</li>
+            </ul>
+            <div class="cta-row">
+              <a class="button" href="#how-it-works">See how it works</a>
+              <a class="button ghost" href="pricing.html">Pricing</a>
+            </div>
+            <p class="hero-jumps">
+              Want the details? <a href="#what-makes-liazon-different">Read what makes Liazon different</a>.
+            </p>
+          </div>
 
-      <section class="chat-layout">
-        <div class="chat-left">
-          <article class="chat-card">
-            <div class="inline-h2">
-              <h2>Bob: </h2>
-              <h2 id = "usersaid"><br></h2>
+          <div class="hero-demo" aria-label="Scheduling demo">
+            <div class="chat-layout">
+              <div class="chat-left">
+                <article class="chat-card">
+                  <p class="chat-line">
+                    <span class="chat-speaker">Bob:</span>
+                    <span id="usersaid"><br></span>
+                  </p>
+                </article>
+                <article class="chat-card">
+                  <p class="chat-line">
+                    <span class="chat-speaker">Alice:</span>
+                    <span id="usersaid2"><br></span>
+                  </p>
+                </article>
+              </div>
+              <article class="chat-card chat-right">
+                <p class="chat-line">
+                  <span class="chat-speaker">Iris:</span>
+                  <span id="irissaid"><br></span>
+                </p>
+              </article>
             </div>
-          </article>
-          <article class="chat-card">
-            <div class="inline-h2">
-              <h2>Alice: </h2>
-              <h2 id = "usersaid2"><br></h2>
-            </div>
-          </article>
-        </div>
-        <div class="chat-right hero">
-          <div class="inline-h2">
-            <h2>Iris: </h2>
-            <h2 id = "irissaid"><br></h2>
           </div>
         </div>
       </section>
 
       <script src="assets/js/typingdemo.js"></script>
 
-      <section class="grid">
-        <article>
-          <h2>In your workflow</h2>
-          <br>
-          <p>Just Cc Iris into your email and she'll do the heavy lifting.</p>
-        </article>
-        <article>
-          <h2>Expert coordinator</h2>
-          <br>
-          <p>Iris uses her Natural Language Processing skills to manage everyone's schedules.</p>
-        </article>
-        <article>
-          <h2>Your superpower</h2>
-          <br>
-          <p>With Iris, the possibilities are <i>endless</i>.</p>
-        </article>
+      <section id="how-it-works" class="content how-it-works">
+        <h2>How it works</h2>
+        <p>
+          CC Iris on the thread. She reads availability, coordinates attendees, and books the meeting.
+        </p>
+        <div class="how-steps" role="list">
+          <article class="how-step" role="listitem">
+            <h3>1. CC Iris</h3>
+            <p>
+              Start or reply to the email thread and CC Iris. Ask for a meeting in plain English, without sending scheduling links.
+            </p>
+          </article>
+          <article class="how-step" role="listitem">
+            <h3>2. Iris reads availability</h3>
+            <p>
+              Iris parses availability like “after 3” or “any afternoon” and matches it to connected calendars, tracking who has responded.
+            </p>
+          </article>
+          <article class="how-step" role="listitem">
+            <h3>3. Iris coordinates and confirms</h3>
+            <p>
+              Iris negotiates across participants, handles time zones automatically, and understands replies like “this works” or “these are fine” in context.
+            </p>
+          </article>
+          <article class="how-step" role="listitem">
+            <h3>4. Iris books the meeting</h3>
+            <p>
+              Once confirmed, Iris books the meeting and sends invites. Rescheduling is built in, with Google Calendar and Microsoft Outlook/365 support.
+            </p>
+          </article>
+        </div>
+        <p class="how-note">
+          Note: It works even when people reply with shorthand like “this works” or “these are fine,” and it handles time zones automatically.
+        </p>
+      </section>
+
+      <section id="what-makes-liazon-different" class="content what-makes-different">
+        <h2>What makes Liazon different</h2>
+        <p>
+          Liazon is a conversation-native AI email scheduling assistant. Instead of sending scheduling links, you CC Iris into the email thread and she schedules meetings inside email conversations.
+        </p>
+        <ul>
+          <li>
+            <strong>Scheduling happens in the thread.</strong> Iris works where scheduling already happens: email. Everyone stays in context and there’s no “go pick a slot” detour.
+            <a href="ai-email-scheduling-assistant/index.html">Learn more</a>.
+          </li>
+          <li><strong>Understands real replies.</strong> Iris parses availability in plain English and can interpret ambiguous responses like “this works” or “these are fine” based on the options under discussion.</li>
+          <li>
+            <strong>Multi-party coordination.</strong> Iris negotiates across participants, tracks confirmations, and moves the thread toward a final time without you managing the back-and-forth.
+            <a href="schedule-meetings-without-links/index.html">Learn more</a>.
+          </li>
+          <li>
+            <strong>Rescheduling is first-class.</strong> When plans change, reply in the same thread and Iris runs meeting rescheduling automation end-to-end, including updated invites.
+            <a href="meeting-rescheduling-software/index.html">Learn more</a>.
+          </li>
+          <li><strong>Time zones handled automatically.</strong> Iris keeps proposed times consistent for each attendee and avoids mistakes when teams are distributed or traveling.</li>
+          <li><strong>Google and Microsoft calendar support.</strong> Iris works with Google Calendar and Microsoft Outlook/365 so she can coordinate availability and book the meeting.</li>
+          <li>
+            <strong>Compare approaches.</strong> See how conversation-native scheduling differs from link-first and poll-based tools:
+            <a href="liazon-vs-calendly-vs-doodle/index.html">Liazon vs Calendly vs Doodle</a>.
+          </li>
+        </ul>
+        <p>
+          Ready to schedule meetings inside email without scheduling links? <a href="pricing.html">View Liazon pricing</a>.
+        </p>
+      </section>
+
+	      <section class="content faq" aria-labelledby="faq-heading">
+	        <h2 id="faq-heading">Frequently Asked Questions</h2>
+	        <div class="faq-list">
+	          <details class="faq-item">
+	            <summary>How does Iris read availability in email?</summary>
+	            <div class="faq-answer">
+	              <p>Iris parses availability written in plain English and matches it against connected calendars. She can work with constraints like “after 3,” “any afternoon,” and “not Tuesday.” See <a href="#how-it-works">How it works</a> for the full flow.</p>
+	            </div>
+	          </details>
+	          <details class="faq-item">
+	            <summary>Does Iris support Google Calendar and Outlook?</summary>
+	            <div class="faq-answer">
+	              <p>Yes. Iris supports Google and Microsoft calendars (Outlook/365), which makes it easier to coordinate across organizations. She is built for calendar coordination, not just sending a link.</p>
+	            </div>
+	          </details>
+          <details class="faq-item">
+            <summary>Can it handle rescheduling?</summary>
+            <div class="faq-answer">
+              <p>Yes. Meeting rescheduling is a first-class flow: reply in the same thread and Iris re-coordinates until a new time is confirmed and booked. Learn more on <a href="meeting-rescheduling-software/index.html">Meeting rescheduling software</a>.</p>
+            </div>
+	          </details>
+	          <details class="faq-item">
+	            <summary>How does Iris manage time zones?</summary>
+	            <div class="faq-answer">
+	              <p>Iris handles time zones automatically during coordination and confirmation so proposed times remain consistent for each attendee. This helps avoid “is that your time or mine?” confusion in distributed threads.</p>
+	            </div>
+	          </details>
+	          <details class="faq-item">
+	            <summary>Does it require scheduling links?</summary>
+	            <div class="faq-answer">
+	              <p>No. Iris coordinates scheduling inside the email thread, so you do not need scheduling links. Learn more on <a href="schedule-meetings-without-links/index.html">Schedule meetings without links</a>.</p>
+	            </div>
+	          </details>
+          <details class="faq-item">
+            <summary>Is email data stored?</summary>
+            <div class="faq-answer">
+              <p>Liazon is designed to coordinate scheduling from the email thread and connected calendars. If you have specific retention or security requirements, <a href="contact.html">contact us</a> and we can walk through how your data is handled.</p>
+            </div>
+          </details>
+	          <details class="faq-item">
+	            <summary>Can it coordinate multiple participants?</summary>
+	            <div class="faq-answer">
+	              <p>Yes. Iris negotiates across participants, tracks confirmations, and keeps options consistent as replies come in. Iris is built for multi-party scheduling inside email conversations.</p>
+	            </div>
+	          </details>
+          <details class="faq-item">
+            <summary>What happens if someone replies vaguely?</summary>
+            <div class="faq-answer">
+              <p>Iris can interpret ambiguous replies like “this works” or “these are fine” by mapping them to the options currently being discussed. If a reply is genuinely unclear, Iris asks a short follow-up to confirm.</p>
+            </div>
+          </details>
+        </div>
       </section>
 
       <section class="content legal-links">
