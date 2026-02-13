@@ -727,6 +727,16 @@ main {
   color: var(--muted);
 }
 
+.site-footer a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
