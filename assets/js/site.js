@@ -51,7 +51,13 @@
     lockScroll();
 
     const firstLink = panel.querySelector("a");
-    if (firstLink) firstLink.focus({ preventScroll: true });
+    if (firstLink) {
+      try {
+        firstLink.focus({ preventScroll: true });
+      } catch (_) {
+        firstLink.focus();
+      }
+    }
   }
 
   function closeMenu({ focusToggle = true } = {}) {
@@ -65,7 +71,13 @@
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-label", "Open menu");
     unlockScroll();
-    if (focusToggle) toggle.focus({ preventScroll: true });
+    if (focusToggle) {
+      try {
+        toggle.focus({ preventScroll: true });
+      } catch (_) {
+        toggle.focus();
+      }
+    }
   }
 
   toggle.addEventListener("click", () => {
@@ -89,9 +101,12 @@
     if (isOpen()) setPanelTop();
   });
 
-  mqDesktop.addEventListener("change", () => {
+  // Safari < 14 uses addListener/removeListener.
+  function onMqChange() {
     if (mqDesktop.matches) closeMenu({ focusToggle: false });
-  });
+  }
+  if (mqDesktop.addEventListener) mqDesktop.addEventListener("change", onMqChange);
+  else if (mqDesktop.addListener) mqDesktop.addListener(onMqChange);
 
   // Ensure initial ARIA state is consistent.
   toggle.setAttribute("aria-expanded", "false");
@@ -112,16 +127,23 @@
     note.style.color = ok ? "#2e7d32" : "#b00020";
   }
 
+  function valueOf(name) {
+    const el = form.elements && form.elements.namedItem ? form.elements.namedItem(name) : null;
+    // form.elements.namedItem can return an element or RadioNodeList; handle the common element case.
+    if (el && typeof el.value === "string") return el.value;
+    return "";
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     // Read values BEFORE doing anything else
     const payload = {
-      name: (form.elements.namedItem("name")?.value || "").trim(),
-      email: (form.elements.namedItem("email")?.value || "").trim(),
-      company: (form.elements.namedItem("company")?.value || "").trim(),
-      message: (form.elements.namedItem("message")?.value || "").trim(),
-      website: (form.elements.namedItem("website")?.value || "").trim(), // honeypot (ok if missing)
+      name: valueOf("name").trim(),
+      email: valueOf("email").trim(),
+      company: valueOf("company").trim(),
+      message: valueOf("message").trim(),
+      website: valueOf("website").trim(), // honeypot (ok if missing)
     };
 
     // basic front-end validation (matches your Lambda expectations)

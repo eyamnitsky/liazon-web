@@ -153,6 +153,8 @@ body {
 
   .nav-toggle {
     display: inline-flex;
+    position: relative;
+    z-index: 110; /* keep toggle clickable above the backdrop */
   }
 
   .nav-backdrop {
