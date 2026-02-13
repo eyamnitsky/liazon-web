@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0132/1385.js" async="async"></script>
-    <title>Liazon | Contact</title>
-    <meta name="description" content="Contact Liazon for inquiries." />
-    <link rel="canonical" href="https://www.liazon.ai/contact.html" />
+    <title>Liazon | Sign-up</title>
+    <meta name="description" content="Create your Liazon account and start your free trial." />
+    <link rel="canonical" href="https://www.liazon.ai/signup.html" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -31,13 +31,13 @@
         ]
       }
     </script>
-    <link rel="stylesheet" href="assets/css/styles.css"/>
-    <link rel="icon" type="image/png" href="assets/images/liazonicon.png">
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="icon" type="image/png" href="assets/images/liazonicon.png" />
   </head>
   <body>
     <header class="site-header">
       <div class="brand">
-        <img src = "assets/images/liazonicon.png" alt = "Liazon icon" style = "max-width:50px;height:auto;">
+        <img src="assets/images/liazonicon.png" alt="Liazon icon" style="max-width: 50px; height: auto;" />
         <p>Liazon</p>
       </div>
       <nav class="site-nav" aria-label="Primary">
@@ -57,22 +57,23 @@
           <a href="use-cases/index.html">Use Cases</a>
           <a href="pricing.html">Pricing</a>
           <a href="liazon-vs-calendly-vs-doodle/index.html">Compare</a>
-          <a class="nav-cta" href="signup.html">Sign-up for free</a>
+          <a class="nav-cta" href="signup.html" aria-current="page">Sign-up for free</a>
         </div>
       </nav>
     </header>
 
     <main>
       <section class="page-header">
-        <h1>Contact us</h1>
-        <p>Sign up for Preview or send us a note</p>
-        <div class="cta-row" style="margin-top:16px;">
-          <a class="button" href="signup.html">Sign-up for free</a>
-        </div>
+        <h1>Sign-up for free</h1>
+        <p>Start your trial. We will email next steps for using Iris and connecting calendars.</p>
       </section>
 
       <section class="content">
-        <form class="contact-form" id="contact-form">
+        <form class="contact-form" id="signup-form">
+          <label>
+            Company name
+            <input type="text" name="company_name" autocomplete="organization" required />
+          </label>
           <label>
             Name
             <input type="text" name="name" autocomplete="name" required />
@@ -82,9 +83,14 @@
             <input type="email" name="email" autocomplete="email" required />
           </label>
           <label>
-            Company
-            <input type="text" name="company" autocomplete="organization" />
+            Phone
+            <input type="tel" name="phone" autocomplete="tel" required />
           </label>
+          <label>
+            Domain (optional)
+            <input type="text" name="domain" autocomplete="organization" />
+          </label>
+
           <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
             <label>
               Website
@@ -92,12 +98,8 @@
             </label>
           </div>
 
-          <label>
-            Message
-            <textarea name="message" rows="4" required></textarea>
-          </label>
-          <button class="button" type="submit">Send message</button>
-          <p class="form-note" id="form-note" aria-live="polite"></p>
+          <button class="button" type="submit">Sign-up for free</button>
+          <p class="form-note" id="signup-note" aria-live="polite"></p>
         </form>
       </section>
     </main>
@@ -114,3 +116,4 @@
     <script src="assets/js/site.js?v=2026-02-13"></script>
   </body>
 </html>
+

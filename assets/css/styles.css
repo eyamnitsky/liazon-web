@@ -75,6 +75,16 @@ body {
   color: var(--accent);
 }
 
+.nav-panel a.nav-cta {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.nav-panel a.nav-cta:hover {
+  background: #0b4fb9;
+  color: #ffffff;
+}
+
 .nav-toggle {
   display: none;
   appearance: none;
