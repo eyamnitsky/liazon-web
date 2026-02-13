@@ -7,26 +7,34 @@
     <meta
       name="description"
       content="CC Iris into email threads and she schedules meetings automatically: reads availability, coordinates attendees, handles rescheduling, and books the meeting with Google and Microsoft calendar support."
-    />
-    <link rel="canonical" href="https://www.liazon.ai/" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-	          {
+	    />
+	    <link rel="canonical" href="https://www.liazon.ai/" />
+	    <!-- Structured data: SoftwareApplication intentionally omits offers until prices are published, and omits aggregateRating until real reviews are shown on-page. -->
+	    <script type="application/ld+json">
+	      {
+	        "@context": "https://schema.org",
+	        "@graph": [
+		          {
 	            "@type": "Organization",
 	            "@id": "https://www.liazon.ai/#organization",
 	            "name": "Liazon",
 	            "url": "https://www.liazon.ai/",
 	            "logo": {
 	              "@type": "ImageObject",
-	              "url": "https://www.liazon.ai/assets/images/liazonicon.png"
-	            }
-	          },
-	          {
-	            "@type": "SoftwareApplication",
-	            "@id": "https://www.liazon.ai/#software",
-	            "name": "Liazon",
+		              "url": "https://www.liazon.ai/assets/images/liazonicon.png"
+		            }
+		          },
+		          {
+		            "@type": "WebSite",
+		            "@id": "https://www.liazon.ai/#website",
+		            "name": "Liazon",
+		            "url": "https://www.liazon.ai/",
+		            "publisher": { "@id": "https://www.liazon.ai/#organization" }
+		          },
+		          {
+		            "@type": "SoftwareApplication",
+		            "@id": "https://www.liazon.ai/#software",
+		            "name": "Liazon",
 	            "applicationCategory": "BusinessApplication",
 	            "operatingSystem": "Web",
 	            "url": "https://www.liazon.ai/",

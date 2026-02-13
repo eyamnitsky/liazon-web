@@ -494,6 +494,18 @@ main {
   overflow-x: auto;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .pricing-table {
   width: 100%;
   border-collapse: collapse;
@@ -507,6 +519,7 @@ main {
   padding: 16px 12px;
   border-bottom: 1px solid var(--border);
   text-align: left;
+  vertical-align: top;
 }
 
 .pricing-table thead th {
@@ -519,6 +532,32 @@ main {
 .pricing-table thead th:nth-child(2),
 .pricing-table thead th:nth-child(3) {
   text-align: center;
+}
+
+.comparison-table thead th:nth-child(n + 2) {
+  text-align: center;
+}
+
+.comparison-table tbody td {
+  text-align: center;
+}
+
+.comparison-table th,
+.comparison-table td {
+  border-right: 1px solid var(--border);
+}
+
+.comparison-table th:last-child,
+.comparison-table td:last-child {
+  border-right: none;
+}
+
+.comparison-table thead th {
+  background: rgba(15, 92, 215, 0.06);
+}
+
+.comparison-table tbody tr:nth-child(even) {
+  background: rgba(15, 92, 215, 0.03);
 }
 
 .pricing-table td.plan-check,

@@ -12,14 +12,25 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "@id": "https://www.liazon.ai/#organization",
-        "name": "Liazon",
-        "url": "https://www.liazon.ai/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.liazon.ai/assets/images/liazonicon.png"
-        }
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.liazon.ai/#organization",
+            "name": "Liazon",
+            "url": "https://www.liazon.ai/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.liazon.ai/assets/images/liazonicon.png"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.liazon.ai/#website",
+            "name": "Liazon",
+            "url": "https://www.liazon.ai/",
+            "publisher": { "@id": "https://www.liazon.ai/#organization" }
+          }
+        ]
       }
     </script>
     <link rel="stylesheet" href="../assets/css/styles.css" />

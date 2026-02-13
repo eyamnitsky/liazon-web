@@ -9,6 +9,7 @@
 	      content="Compare Liazon, Calendly, and Doodle. Learn how AI email scheduling inside email threads differs from link-based booking and poll-based coordination."
 	    />
 	    <link rel="canonical" href="https://www.liazon.ai/liazon-vs-calendly-vs-doodle/" />
+	    <!-- Structured data: SoftwareApplication intentionally omits offers until prices are published, and omits aggregateRating until real reviews are shown on-page. -->
 	    <script type="application/ld+json">
 	      {
 	        "@context": "https://schema.org",
@@ -22,6 +23,13 @@
 	              "@type": "ImageObject",
 	              "url": "https://www.liazon.ai/assets/images/liazonicon.png"
 	            }
+	          },
+	          {
+	            "@type": "WebSite",
+	            "@id": "https://www.liazon.ai/#website",
+	            "name": "Liazon",
+	            "url": "https://www.liazon.ai/",
+	            "publisher": { "@id": "https://www.liazon.ai/#organization" }
 	          },
 	          {
 	            "@type": "SoftwareApplication",
@@ -60,7 +68,7 @@
         <h1>Liazon vs Calendly vs Doodle</h1>
         <p class="hero-lede">How AI email scheduling compares to link-based scheduling tools.</p>
         <div class="cta-row">
-          <a class="button" href="../pricing.html">See Pricing</a>
+          <a class="button" href="../pricing.html">See pricing</a>
           <a class="button ghost" href="../index.html#how-it-works">See how it works</a>
         </div>
         <p class="hero-jumps">
@@ -87,13 +95,16 @@
         <h2>Feature comparison (high level)</h2>
         <p>
           The table below summarizes common workflows. Specific capabilities can vary by plan and configuration, and some teams combine multiple tools depending on the meeting type.
-        </p>
-        <div class="table-scroll">
-          <table class="pricing-table comparison-table">
-            <thead>
-              <tr>
-                <th scope="col">Capability</th>
-                <th scope="col">Liazon</th>
+	        </p>
+	        <div class="table-scroll" role="region" aria-label="Feature comparison table">
+	          <table class="pricing-table comparison-table">
+	            <caption class="sr-only">
+	              Feature comparison table: Liazon, Calendly, and Doodle
+	            </caption>
+	            <thead>
+	              <tr>
+	                <th scope="col">Capability</th>
+	                <th scope="col">Liazon</th>
                 <th scope="col">Calendly</th>
                 <th scope="col">Doodle</th>
               </tr>
@@ -271,7 +282,7 @@
           <strong>Want to try conversation-native scheduling?</strong> If you want to schedule meetings inside email with no scheduling links required, Liazon is built for your threads.
         </p>
         <div class="cta-row">
-          <a class="button" href="../pricing.html">See Pricing</a>
+          <a class="button" href="../pricing.html">See pricing</a>
           <a class="button ghost" href="../index.html">Visit the homepage</a>
         </div>
       </section>
