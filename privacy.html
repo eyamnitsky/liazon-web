@@ -39,15 +39,27 @@
 	        <img src = "assets/images/liazonicon.png" alt = "Liazon icon" style = "max-width:50px;height:auto;">
 	        <p>Liazon</p>
 	      </div>
-	      <nav class="site-nav">
-	        <a href="index.html">Home</a>
-	        <a href="features.html">Features</a>
-        <a href="use-cases/index.html">Use Cases</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="liazon-vs-calendly-vs-doodle/index.html">Compare</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+	      <nav class="site-nav" aria-label="Primary">
+	        <button
+	          class="nav-toggle"
+	          type="button"
+	          aria-label="Open menu"
+	          aria-expanded="false"
+	          aria-controls="site-nav-panel"
+	        >
+	          <span class="nav-toggle-icon" aria-hidden="true"></span>
+	        </button>
+	        <div class="nav-backdrop" aria-hidden="true"></div>
+	        <div class="nav-panel" id="site-nav-panel">
+	          <a href="index.html">Home</a>
+	          <a href="features.html">Features</a>
+	          <a href="use-cases/index.html">Use Cases</a>
+	          <a href="pricing.html">Pricing</a>
+	          <a href="liazon-vs-calendly-vs-doodle/index.html">Compare</a>
+	          <a href="about.html">About</a>
+	          <a href="contact.html">Contact</a>
+	        </div>
+	      </nav>
     </header>
 
     <main>

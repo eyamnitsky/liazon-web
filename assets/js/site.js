@@ -1,5 +1,104 @@
 // Contact form handler (single, correct submit flow)
 (() => {
+  const nav = document.querySelector(".site-nav");
+  if (!nav) return;
+
+  const toggle = nav.querySelector(".nav-toggle");
+  const panel = nav.querySelector(".nav-panel");
+  const backdrop = nav.querySelector(".nav-backdrop");
+  const header = document.querySelector(".site-header");
+  if (!toggle || !panel || !backdrop || !header) return;
+
+  const mqDesktop = window.matchMedia("(min-width: 900px)");
+  let lockedScrollY = 0;
+
+  function setPanelTop() {
+    const rect = header.getBoundingClientRect();
+    const top = Math.max(0, Math.round(rect.bottom));
+    document.documentElement.style.setProperty("--nav-panel-top", `${top}px`);
+  }
+
+  function lockScroll() {
+    lockedScrollY = window.scrollY || 0;
+    document.body.classList.add("nav-open");
+    // iOS-friendly scroll lock.
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${lockedScrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+  }
+
+  function unlockScroll() {
+    document.body.classList.remove("nav-open");
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    window.scrollTo(0, lockedScrollY);
+  }
+
+  function isOpen() {
+    return nav.classList.contains("is-open");
+  }
+
+  function openMenu() {
+    setPanelTop();
+    nav.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close menu");
+    lockScroll();
+
+    const firstLink = panel.querySelector("a");
+    if (firstLink) firstLink.focus({ preventScroll: true });
+  }
+
+  function closeMenu({ focusToggle = true } = {}) {
+    if (!isOpen()) {
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open menu");
+      return;
+    }
+
+    nav.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
+    unlockScroll();
+    if (focusToggle) toggle.focus({ preventScroll: true });
+  }
+
+  toggle.addEventListener("click", () => {
+    if (isOpen()) closeMenu();
+    else openMenu();
+  });
+
+  backdrop.addEventListener("click", () => closeMenu());
+
+  panel.addEventListener("click", (e) => {
+    const link = e.target && e.target.closest ? e.target.closest("a") : null;
+    if (!link) return;
+    closeMenu({ focusToggle: false });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  window.addEventListener("resize", () => {
+    if (isOpen()) setPanelTop();
+  });
+
+  mqDesktop.addEventListener("change", () => {
+    if (mqDesktop.matches) closeMenu({ focusToggle: false });
+  });
+
+  // Ensure initial ARIA state is consistent.
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-label", "Open menu");
+})();
+
+(() => {
   const API_URL = "https://7ofigcp921.execute-api.us-east-1.amazonaws.com/contact";
 
   const form = document.getElementById("contact-form");
