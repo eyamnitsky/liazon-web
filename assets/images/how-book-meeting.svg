@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 144" width="192" height="144" role="img">
+  <title>Book the meeting</title>
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f5cd7" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#0f5cd7" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="192" height="144" rx="18" fill="url(#g4)"/>
+
+  <!-- Calendar -->
+  <rect x="22" y="26" width="120" height="92" rx="16" fill="#ffffff" stroke="#d8e1ec" stroke-width="6"/>
+  <rect x="22" y="26" width="120" height="28" rx="16" fill="#2b74d7" opacity="0.95"/>
+  <rect x="44" y="14" width="16" height="28" rx="8" fill="#143a6a"/>
+  <rect x="80" y="14" width="16" height="28" rx="8" fill="#143a6a"/>
+  <rect x="116" y="14" width="16" height="28" rx="8" fill="#143a6a"/>
+  <path d="M54 88 l14 14 l30 -38" fill="none" stroke="#2ea44f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Clock -->
+  <circle cx="150" cy="98" r="34" fill="#ffffff" stroke="#6a7c8c" stroke-width="8"/>
+  <circle cx="150" cy="98" r="4" fill="#6a7c8c"/>
+  <path d="M150 98 V78" stroke="#143a6a" stroke-width="8" stroke-linecap="round"/>
+  <path d="M150 98 L166 88" stroke="#143a6a" stroke-width="8" stroke-linecap="round"/>
+</svg>
+

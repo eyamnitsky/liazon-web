@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 144" width="192" height="144" role="img">
+  <title>Coordinate and confirm</title>
+  <defs>
+    <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f5cd7" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#0f5cd7" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="192" height="144" rx="18" fill="url(#g3)"/>
+
+  <!-- Calendar -->
+  <rect x="86" y="26" width="92" height="92" rx="16" fill="#ffffff" stroke="#d8e1ec" stroke-width="6"/>
+  <rect x="86" y="26" width="92" height="26" rx="16" fill="#8ab6db"/>
+  <rect x="104" y="14" width="16" height="26" rx="8" fill="#143a6a"/>
+  <rect x="144" y="14" width="16" height="26" rx="8" fill="#143a6a"/>
+  <path d="M112 86 l10 10 l22 -28" fill="none" stroke="#2ea44f" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Chat bubbles -->
+  <path d="M20 54 a18 18 0 0 1 18 -18 h50 a18 18 0 0 1 18 18 v18 a18 18 0 0 1 -18 18 h-16 l-16 14 v-14 h-20 a18 18 0 0 1 -18 -18z"
+        fill="#2b74d7" opacity="0.95"/>
+  <circle cx="44" cy="62" r="5" fill="#ffffff"/>
+  <circle cx="62" cy="62" r="5" fill="#ffffff"/>
+  <circle cx="80" cy="62" r="5" fill="#ffffff"/>
+
+  <path d="M44 84 a18 18 0 0 1 18 -18 h52 a18 18 0 0 1 18 18 v18 a18 18 0 0 1 -18 18 h-20 l-18 14 v-14 h-14 a18 18 0 0 1 -18 -18z"
+        fill="#dfe6ee" stroke="#c4d2e0" stroke-width="4"/>
+  <circle cx="72" cy="92" r="5" fill="#6a7c8c"/>
+  <circle cx="90" cy="92" r="5" fill="#6a7c8c"/>
+  <circle cx="108" cy="92" r="5" fill="#6a7c8c"/>
+</svg>
+

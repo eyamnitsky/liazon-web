@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 144" width="192" height="144" role="img">
+  <title>CC Iris</title>
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f5cd7" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#0f5cd7" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="192" height="144" rx="18" fill="url(#g1)"/>
+
+  <!-- Envelope -->
+  <rect x="16" y="40" width="96" height="64" rx="10" fill="#ffffff" stroke="#143a6a" stroke-width="6"/>
+  <path d="M24 48 L64 80 L104 48" fill="none" stroke="#143a6a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M24 96 L56 76" fill="none" stroke="#d8e1ec" stroke-width="6" stroke-linecap="round"/>
+  <path d="M104 96 L72 76" fill="none" stroke="#d8e1ec" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- CC badge -->
+  <circle cx="108" cy="36" r="20" fill="#0f5cd7" stroke="#143a6a" stroke-width="6"/>
+  <text x="108" y="42" text-anchor="middle" font-family="Space Grotesk, Segoe UI, sans-serif" font-size="16" font-weight="800" fill="#ffffff">CC</text>
+
+  <!-- Iris tag -->
+  <rect x="56" y="92" width="92" height="36" rx="12" fill="#0f5cd7" stroke="#143a6a" stroke-width="6"/>
+  <text x="94" y="116" text-anchor="middle" font-family="Space Grotesk, Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#ffffff">Iris</text>
+  <path d="M140 108 l6 -6 l6 6 l-6 6z" fill="#ffffff" opacity="0.95"/>
+</svg>
+

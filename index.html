@@ -13,37 +13,25 @@
       {
         "@context": "https://schema.org",
         "@graph": [
-          {
-            "@type": "Organization",
-            "@id": "https://www.liazon.ai/#organization",
-            "name": "Liazon",
-            "url": "https://www.liazon.ai",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://www.liazon.ai/assets/images/liazonicon.png"
-            }
-          },
-          {
-            "@type": "SoftwareApplication",
-            "@id": "https://www.liazon.ai/#software",
-            "name": "Liazon",
-            "applicationCategory": "BusinessApplication",
-            "operatingSystem": "Web",
-            "url": "https://www.liazon.ai",
-            "description": "AI email scheduling assistant that coordinates meetings inside email conversations: reads availability, negotiates across attendees, handles rescheduling, and books meetings without scheduling links.",
-            "offers": [
-              {
-                "@type": "Offer",
-                "name": "Free",
-                "url": "https://www.liazon.ai/pricing.html"
-              },
-              {
-                "@type": "Offer",
-                "name": "Pro",
-                "url": "https://www.liazon.ai/pricing.html"
-              }
-            ]
-          },
+	          {
+	            "@type": "Organization",
+	            "@id": "https://www.liazon.ai/#organization",
+	            "name": "Liazon",
+	            "url": "https://www.liazon.ai/",
+	            "logo": {
+	              "@type": "ImageObject",
+	              "url": "https://www.liazon.ai/assets/images/liazonicon.png"
+	            }
+	          },
+	          {
+	            "@type": "SoftwareApplication",
+	            "@id": "https://www.liazon.ai/#software",
+	            "name": "Liazon",
+	            "applicationCategory": "BusinessApplication",
+	            "operatingSystem": "Web",
+	            "url": "https://www.liazon.ai/",
+	            "description": "AI email scheduling assistant that coordinates meetings inside email conversations: you CC Iris into threads, she reads availability, handles rescheduling, and books the meeting with Google and Microsoft calendar support."
+	          },
 	          {
 	            "@type": "FAQPage",
 	            "@id": "https://www.liazon.ai/#faq",
@@ -129,7 +117,9 @@
       <nav class="site-nav">
         <a href="index.html" aria-current="page">Home</a>
         <a href="features.html">Features</a>
+        <a href="use-cases/index.html">Use Cases</a>
         <a href="pricing.html">Pricing</a>
+        <a href="liazon-vs-calendly-vs-doodle/index.html">Compare</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </nav>
@@ -192,32 +182,68 @@
         <p>
           CC Iris on the thread. She reads availability, coordinates attendees, and books the meeting.
         </p>
-        <div class="how-steps" role="list">
-          <article class="how-step" role="listitem">
-            <h3>1. CC Iris</h3>
-            <p>
-              Start or reply to the email thread and CC Iris. Ask for a meeting in plain English, without sending scheduling links.
-            </p>
-          </article>
-          <article class="how-step" role="listitem">
-            <h3>2. Iris reads availability</h3>
-            <p>
-              Iris parses availability like “after 3” or “any afternoon” and matches it to connected calendars, tracking who has responded.
-            </p>
-          </article>
-          <article class="how-step" role="listitem">
-            <h3>3. Iris coordinates and confirms</h3>
-            <p>
-              Iris negotiates across participants, handles time zones automatically, and understands replies like “this works” or “these are fine” in context.
-            </p>
-          </article>
-          <article class="how-step" role="listitem">
-            <h3>4. Iris books the meeting</h3>
-            <p>
-              Once confirmed, Iris books the meeting and sends invites. Rescheduling is built in, with Google Calendar and Microsoft Outlook/365 support.
-            </p>
-          </article>
-        </div>
+	        <div class="how-steps" role="list">
+	          <article class="how-step" role="listitem">
+	            <img
+	              class="how-icon"
+	              src="assets/images/how-cc-iris.svg"
+	              alt="CC Iris in an email thread"
+	              width="96"
+	              height="72"
+	              loading="lazy"
+	              decoding="async"
+	            />
+	            <h3>1. CC Iris</h3>
+	            <p>
+	              Start or reply to the email thread and CC Iris. Ask for a meeting in plain English, without sending scheduling links.
+	            </p>
+	          </article>
+	          <article class="how-step" role="listitem">
+	            <img
+	              class="how-icon"
+	              src="assets/images/how-read-availability.svg"
+	              alt="Iris reads availability in plain English"
+	              width="96"
+	              height="72"
+	              loading="lazy"
+	              decoding="async"
+	            />
+	            <h3>2. Iris reads availability</h3>
+	            <p>
+	              Iris parses availability like “after 3” or “any afternoon” and matches it to connected calendars, tracking who has responded.
+	            </p>
+	          </article>
+	          <article class="how-step" role="listitem">
+	            <img
+	              class="how-icon"
+	              src="assets/images/how-coordinate-confirm.svg"
+	              alt="Iris coordinates and confirms with participants"
+	              width="96"
+	              height="72"
+	              loading="lazy"
+	              decoding="async"
+	            />
+	            <h3>3. Iris coordinates and confirms</h3>
+	            <p>
+	              Iris negotiates across participants, handles time zones automatically, and understands replies like “this works” or “these are fine” in context.
+	            </p>
+	          </article>
+	          <article class="how-step" role="listitem">
+	            <img
+	              class="how-icon"
+	              src="assets/images/how-book-meeting.svg"
+	              alt="Iris books the meeting and sends invites"
+	              width="96"
+	              height="72"
+	              loading="lazy"
+	              decoding="async"
+	            />
+	            <h3>4. Iris books the meeting</h3>
+	            <p>
+	              Once confirmed, Iris books the meeting and sends invites. Rescheduling is built in, with Google Calendar and Microsoft Outlook/365 support.
+	            </p>
+	          </article>
+	        </div>
         <p class="how-note">
           Note: It works even when people reply with shorthand like “this works” or “these are fine,” and it handles time zones automatically.
         </p>
@@ -254,10 +280,29 @@
         </p>
       </section>
 
-	      <section class="content faq" aria-labelledby="faq-heading">
-	        <h2 id="faq-heading">Frequently Asked Questions</h2>
-	        <div class="faq-list">
-	          <details class="faq-item">
+      <section id="use-cases-home" class="content use-cases-home" aria-labelledby="use-cases-home-heading">
+        <h2 id="use-cases-home-heading">Who is Liazon for?</h2>
+        <p>
+          Liazon is designed for professionals and teams who spend most of their workday coordinating meetings by email but want that overhead erased. It's ideal for:
+        </p>
+        <ul>
+          <li><strong>Busy executives:</strong> eliminate back-and-forth scheduling and let Iris manage meeting coordination inside your conversations.</li>
+          <li><strong>Startup founders:</strong> keep momentum in investor, partner, and customer threads without sending links or juggling calendars.</li>
+          <li><strong>Business development professionals:</strong> negotiate times seamlessly across multiple stakeholders without losing context.</li>
+          <li><strong>Talent acquisition and recruiting teams:</strong> coordinate interviews with candidates, hiring managers, and panels without manual follow-ups.</li>
+          <li><strong>Operations teams:</strong> streamline internal and cross-functional coordination with automatic scheduling and rescheduling.</li>
+          <li><strong>Sales and SaaS teams:</strong> work naturally inside sales conversations without switching tools or sending scheduling links.</li>
+          <li><strong>Executive assistants:</strong> augment your workflow by offloading the repetitive coordination and rescheduling to Iris.</li>
+        </ul>
+        <p>
+          <a href="use-cases/index.html">Learn more about how Liazon helps your team &rarr;</a>
+        </p>
+      </section>
+
+      <section class="content faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
 	            <summary>How does Iris read availability in email?</summary>
 	            <div class="faq-answer">
 	              <p>Iris parses availability written in plain English and matches it against connected calendars. She can work with constraints like “after 3,” “any afternoon,” and “not Tuesday.” See <a href="#how-it-works">How it works</a> for the full flow.</p>

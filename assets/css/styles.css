@@ -187,6 +187,10 @@ main {
   flex-wrap: wrap;
 }
 
+.content .cta-row {
+  margin-top: 18px;
+}
+
 .inline-h2 h2 {
   display: inline;
   margin: 0;
@@ -351,6 +355,13 @@ main {
   background: #f9fbff;
   border-radius: 16px;
   padding: 22px 24px;
+}
+
+.how-icon {
+  display: block;
+  width: 96px;
+  height: 72px;
+  margin-bottom: 12px;
 }
 
 .how-step h3 {
