@@ -29,6 +29,48 @@ jobs:
             --exclude ".git/*" \
             --exclude ".github/*"
 
+      - name: Update and publish CloudFront function
+        run: |
+          set -euo pipefail
+          FUNCTION_NAME="liazon-canonical-redirects"
+          FUNCTION_FILE="cloudfront-functions/liazon-canonical-redirects.js"
+          FUNCTION_COMMENT="Canonical redirects + trailing-slash index rewrite"
+
+          DEV_ETAG=$(aws cloudfront describe-function \
+            --name "$FUNCTION_NAME" \
+            --stage DEVELOPMENT \
+            --query "ETag" \
+            --output text)
+
+          UPDATE_ETAG=$(aws cloudfront update-function \
+            --name "$FUNCTION_NAME" \
+            --if-match "$DEV_ETAG" \
+            --function-config "Comment=$FUNCTION_COMMENT,Runtime=cloudfront-js-2.0" \
+            --function-code "fileb://$FUNCTION_FILE" \
+            --query "ETag" \
+            --output text)
+
+          aws cloudfront publish-function \
+            --name "$FUNCTION_NAME" \
+            --if-match "$UPDATE_ETAG"
+
+          for i in {1..24}; do
+            STATUS=$(aws cloudfront describe-function \
+              --name "$FUNCTION_NAME" \
+              --stage LIVE \
+              --query "FunctionSummary.Status" \
+              --output text)
+            if [ "$STATUS" = "DEPLOYED" ]; then
+              break
+            fi
+            sleep 5
+          done
+
+          if [ "$STATUS" != "DEPLOYED" ]; then
+            echo "CloudFront function did not reach DEPLOYED status in time."
+            exit 1
+          fi
+
       - name: Invalidate CloudFront
         run: |
           aws cloudfront create-invalidation \
