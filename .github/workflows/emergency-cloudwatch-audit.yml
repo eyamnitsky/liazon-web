@@ -30,22 +30,21 @@ jobs:
           NOW_MS=$(($(date -u +%s) * 1000))
           START_2H_MS=$((NOW_MS - 2 * 60 * 60 * 1000))
           START_24H_MS=$((NOW_MS - 24 * 60 * 60 * 1000))
-          MATCH_REGEX='(liazon|iris|signup|sign-up|contact|email|ses|brevo|schedule)'
           FILTER_PATTERN='?signup ?Sign-up ?company_name ?Iris ?iris ?email ?Email ?ses ?SES ?brevo ?Brevo ?calendar ?schedule ?Schedule'
+          GROUP_QUERY='logGroups[?contains(logGroupName, `liazon`) || contains(logGroupName, `iris`) || contains(logGroupName, `signup`) || contains(logGroupName, `sign-up`) || contains(logGroupName, `contact`) || contains(logGroupName, `email`) || contains(logGroupName, `ses`) || contains(logGroupName, `brevo`) || contains(logGroupName, `schedule`)].logGroupName'
 
           echo "Audit window 2h start ms: ${START_2H_MS}"
           echo "Context window 24h start ms: ${START_24H_MS}"
           echo
 
-          all_groups=$(aws logs describe-log-groups \
+          groups_text=$(aws logs describe-log-groups \
             --region "$REGION" \
-            --query 'logGroups[].logGroupName' \
-            --output text | tr '\t' '\n' || true)
+            --query "$GROUP_QUERY" \
+            --output text || true)
+          read -r -a GROUPS <<< "$groups_text"
 
-          mapfile -t GROUPS < <(printf '%s\n' "$all_groups" | awk 'NF' | grep -Ei "$MATCH_REGEX" | sort -u || true)
-
-          if [ "${#GROUPS[@]}" -eq 0 ]; then
-            echo "No CloudWatch log groups matched ${MATCH_REGEX}."
+          if [ "${#GROUPS[@]}" -eq 0 ] || [ -z "${GROUPS[0]:-}" ]; then
+            echo "No matching CloudWatch log groups found."
             exit 0
           fi
 
