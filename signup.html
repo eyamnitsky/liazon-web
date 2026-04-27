@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0132/1385.js" async="async"></script>
-    <title>Liazon | Sign-up unavailable</title>
-    <meta name="description" content="Liazon sign-up is temporarily unavailable." />
+    <title>Liazon | Sign-up</title>
+    <meta name="description" content="Create your Liazon account and start your free trial." />
     <link rel="canonical" href="https://www.liazon.ai/signup.html" />
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -57,24 +58,54 @@
           <a href="/use-cases/">Use Cases</a>
           <a href="/pricing/">Pricing</a>
           <a href="/liazon-vs-calendly-vs-doodle/">Compare</a>
-          <a class="nav-cta" href="/contact.html">Contact</a>
+          <a class="nav-cta" href="/signup.html" aria-current="page">Sign-up for free</a>
         </div>
       </nav>
     </header>
 
     <main>
       <section class="page-header">
-        <h1>Sign-up is temporarily unavailable</h1>
-        <p>We are not accepting new sign-ups right now. Existing customers can continue using Liazon as usual.</p>
+        <h1>Sign-up for free</h1>
+        <p>Start your trial. We will email next steps for using Iris and connecting calendars.</p>
       </section>
 
       <section class="content">
-        <div class="contact-form">
-          <p class="form-note" id="signup-note" aria-live="polite">
-            New account creation is currently disabled. Please contact Liazon support if you need help with an existing account.
-          </p>
-          <a class="button" href="/contact.html">Contact support</a>
-        </div>
+        <form class="contact-form" id="signup-form">
+          <label>
+            Company name
+            <input type="text" name="company_name" autocomplete="organization" required />
+          </label>
+          <label>
+            Name
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            Phone
+            <input type="tel" name="phone" autocomplete="tel" required />
+          </label>
+          <label>
+            Domain (optional)
+            <input type="text" name="domain" autocomplete="organization" />
+          </label>
+
+          <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+            <label>
+              Website
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+
+          <div class="turnstile-wrap">
+            <div class="cf-turnstile" data-sitekey="__TURNSTILE_SITE_KEY__"></div>
+          </div>
+
+          <button class="button" type="submit">Sign-up for free</button>
+          <p class="form-note" id="signup-note" aria-live="polite"></p>
+        </form>
       </section>
     </main>
 

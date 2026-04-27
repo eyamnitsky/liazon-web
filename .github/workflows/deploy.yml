@@ -22,6 +22,14 @@ jobs:
           role-to-assume: arn:aws:iam::345594578426:role/GitHubDeployRoleIrisProd
           aws-region: us-east-1
 
+      - name: Configure Turnstile site key
+        run: |
+          : "${TURNSTILE_SITE_KEY:?Missing TURNSTILE_SITE_KEY repository variable}"
+          find . -name '*.html' -type f -print0 \
+            | xargs -0 sed -i "s/__TURNSTILE_SITE_KEY__/${TURNSTILE_SITE_KEY}/g"
+        env:
+          TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
+
       - name: Sync to S3
         run: |
           aws s3 sync . s3://www.liazon.ai \
@@ -76,23 +84,3 @@ jobs:
           aws cloudfront create-invalidation \
             --distribution-id "EJENZS2ECEK" \
             --paths "/*"
-
-      - name: Disable signup API route
-        run: |
-          set -euo pipefail
-          API_ID="7ofigcp921"
-          ROUTE_ID=$(aws apigatewayv2 get-routes \
-            --api-id "$API_ID" \
-            --query "Items[?RouteKey=='POST /signup'].RouteId | [0]" \
-            --output text)
-
-          if [ "$ROUTE_ID" = "None" ] || [ -z "$ROUTE_ID" ]; then
-            echo "POST /signup route is already absent."
-            exit 0
-          fi
-
-          aws apigatewayv2 delete-route \
-            --api-id "$API_ID" \
-            --route-id "$ROUTE_ID"
-
-          echo "Deleted POST /signup API Gateway route: $ROUTE_ID"

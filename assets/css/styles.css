@@ -735,6 +735,10 @@ main {
   font-size: 0.95rem;
 }
 
+.turnstile-wrap {
+  min-height: 65px;
+}
+
 .site-footer {
   padding: 24px 8vw 40px;
   display: flex;

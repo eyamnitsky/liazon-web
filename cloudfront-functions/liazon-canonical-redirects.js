@@ -15,10 +15,6 @@ function handler(event) {
     return redirect("https://www.liazon.ai/" + buildQuerystring(request));
   }
 
-  if (uri === "/signup.html" || uri === "/signup/") {
-    return signupUnavailable();
-  }
-
   // Redirect /path/index.html to /path/.
   if (uri.endsWith("/index.html")) {
     var newUri = uri.slice(0, -("index.html".length));
@@ -49,21 +45,6 @@ function redirect(location) {
     statusDescription: "Moved Permanently",
     headers: {
       location: { value: location }
-    }
-  };
-}
-
-function signupUnavailable() {
-  return {
-    statusCode: 410,
-    statusDescription: "Gone",
-    headers: {
-      "content-type": { value: "text/html; charset=utf-8" },
-      "cache-control": { value: "no-store, max-age=0" }
-    },
-    body: {
-      encoding: "text",
-      data: "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Liazon | Sign-up unavailable</title></head><body><main style=\"font-family:Arial,sans-serif;max-width:680px;margin:12vh auto;padding:0 24px;line-height:1.5\"><h1>Sign-up is temporarily unavailable</h1><p>New account creation is currently disabled. Existing customers can continue using Liazon as usual.</p><p><a href=\"/contact.html\">Contact support</a></p></main></body></html>"
     }
   };
 }
