@@ -151,7 +151,6 @@ const turnstileGuard = (() => {
     if (!container.dataset.widgetId) {
       const widgetId = turnstile.render(container, {
         sitekey,
-        execution: "execute",
         appearance: "always",
         callback(token) {
           container.dataset.token = token || "";
@@ -192,7 +191,9 @@ const turnstileGuard = (() => {
         reject(err);
       };
 
-      turnstile.execute(container.dataset.widgetId);
+      if (typeof turnstile.execute === "function") {
+        turnstile.execute(container.dataset.widgetId);
+      }
     });
   }
 
