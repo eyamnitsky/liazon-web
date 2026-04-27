@@ -37,10 +37,12 @@ jobs:
           echo "Context window 24h start ms: ${START_24H_MS}"
           echo
 
-          mapfile -t GROUPS < <(aws logs describe-log-groups \
+          all_groups=$(aws logs describe-log-groups \
             --region "$REGION" \
             --query 'logGroups[].logGroupName' \
-            --output text | tr '\t' '\n' | grep -Ei "$MATCH_REGEX" | sort -u)
+            --output text | tr '\t' '\n' || true)
+
+          mapfile -t GROUPS < <(printf '%s\n' "$all_groups" | awk 'NF' | grep -Ei "$MATCH_REGEX" | sort -u || true)
 
           if [ "${#GROUPS[@]}" -eq 0 ]; then
             echo "No CloudWatch log groups matched ${MATCH_REGEX}."
@@ -96,11 +98,11 @@ jobs:
               --query 'events[].message' \
               --output text > "$tmp" || true
 
-            hits=$(wc -l < "$tmp" | tr -d ' ')
+            hits=$(awk 'END { print NR }' "$tmp")
             printf '  hits=%s group=%s\n' "$hits" "$group"
             if [ "$hits" -gt 0 ]; then
               echo "    Redacted samples:"
-              sed -E 's/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/[redacted-email]/g; s/[0-9]{3}[-. )]*[0-9]{3}[-. ]*[0-9]{4}/[redacted-phone]/g' "$tmp" | head -5 | sed 's/^/      /'
+              sed -E 's/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/[redacted-email]/g; s/[0-9]{3}[-. )]*[0-9]{3}[-. ]*[0-9]{4}/[redacted-phone]/g' "$tmp" | head -5 | sed 's/^/      /' || true
             fi
             rm -f "$tmp"
           done
