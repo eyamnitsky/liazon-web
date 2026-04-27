@@ -113,6 +113,96 @@
   toggle.setAttribute("aria-label", "Open menu");
 })();
 
+const turnstileGuard = (() => {
+  const SCRIPT_URL = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+  let loadPromise = null;
+
+  function load() {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (loadPromise) return loadPromise;
+
+    loadPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = SCRIPT_URL;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve(window.turnstile);
+      script.onerror = () => reject(new Error("Turnstile failed to load"));
+      document.head.appendChild(script);
+    });
+
+    return loadPromise;
+  }
+
+  function containerFor(form) {
+    return form.querySelector(".turnstile-widget");
+  }
+
+  async function tokenFor(form) {
+    const container = containerFor(form);
+    if (!container) throw new Error("Verification widget is missing");
+
+    const existingToken = container.dataset.token || "";
+    if (existingToken) return existingToken;
+
+    const turnstile = await load();
+    const sitekey = container.dataset.sitekey;
+    if (!sitekey || sitekey === "__TURNSTILE_SITE_KEY__") {
+      throw new Error("Verification is not configured");
+    }
+
+    if (!container.dataset.widgetId) {
+      const widgetId = turnstile.render(container, {
+        sitekey,
+        execution: "execute",
+        appearance: "interaction-only",
+        callback(token) {
+          container.dataset.token = token || "";
+          if (container.__turnstileResolve) container.__turnstileResolve(token || "");
+        },
+        "expired-callback"() {
+          container.dataset.token = "";
+        },
+        "error-callback"() {
+          container.dataset.token = "";
+          if (container.__turnstileReject) {
+            container.__turnstileReject(new Error("Verification challenge failed"));
+          }
+        },
+      });
+      container.dataset.widgetId = widgetId;
+    }
+
+    return new Promise((resolve, reject) => {
+      const timeout = window.setTimeout(() => {
+        reject(new Error("Verification challenge timed out"));
+      }, 60000);
+
+      container.__turnstileResolve = (token) => {
+        window.clearTimeout(timeout);
+        resolve(token);
+      };
+      container.__turnstileReject = (err) => {
+        window.clearTimeout(timeout);
+        reject(err);
+      };
+
+      turnstile.execute(container.dataset.widgetId);
+    });
+  }
+
+  function reset(form) {
+    const container = containerFor(form);
+    if (!container) return;
+    container.dataset.token = "";
+    if (window.turnstile && container.dataset.widgetId) {
+      window.turnstile.reset(container.dataset.widgetId);
+    }
+  }
+
+  return { tokenFor, reset };
+})();
+
 (() => {
   const API_URL = "https://7ofigcp921.execute-api.us-east-1.amazonaws.com/contact";
 
@@ -144,22 +234,24 @@
       company: valueOf("company").trim(),
       message: valueOf("message").trim(),
       website: valueOf("website").trim(), // honeypot (ok if missing)
-      turnstile_token: valueOf("cf-turnstile-response").trim(),
+      turnstile_token: "",
     };
 
     // basic front-end validation (matches your Lambda expectations)
     if (!payload.name) return setNote("Please add your name so we know how to address you.", false);
     if (!payload.email) return setNote("Please add your email so we can reply.", false);
     if (!payload.message) return setNote("Please add a message.", false);
-    if (!payload.turnstile_token) return setNote("Please complete the verification challenge.", false);
-
     setNote("");
     if (button) {
       button.disabled = true;
-      button.textContent = "Sending…";
+      button.textContent = "Verifying...";
     }
 
     try {
+      payload.turnstile_token = await turnstileGuard.tokenFor(form);
+      if (!payload.turnstile_token) throw new Error("Verification challenge failed");
+      if (button) button.textContent = "Sending...";
+
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -171,16 +263,16 @@
 
       if (res.ok && data.ok) {
         form.reset(); // reset ONLY after success
-        if (window.turnstile) window.turnstile.reset();
+        turnstileGuard.reset(form);
         setNote("Thanks! Your message has been sent.");
       } else {
-        if (window.turnstile) window.turnstile.reset();
+        turnstileGuard.reset(form);
         setNote(`Error: ${data.error || "Request failed"}`, false);
       }
     } catch (err) {
       console.error("Network error:", err);
-      if (window.turnstile) window.turnstile.reset();
-      setNote("Network error. Please try again.", false);
+      turnstileGuard.reset(form);
+      setNote(err.message || "Network error. Please try again.", false);
     } finally {
       if (button) {
         button.disabled = false;
@@ -220,22 +312,24 @@
       phone: valueOf("phone").trim(),
       domain: valueOf("domain").trim(),
       website: valueOf("website").trim(), // honeypot (ok if missing)
-      turnstile_token: valueOf("cf-turnstile-response").trim(),
+      turnstile_token: "",
     };
 
     if (!payload.company_name) return setNote("Please add your company name.", false);
     if (!payload.name) return setNote("Please add your name.", false);
     if (!payload.email) return setNote("Please add your email.", false);
     if (!payload.phone) return setNote("Please add your phone number.", false);
-    if (!payload.turnstile_token) return setNote("Please complete the verification challenge.", false);
-
     setNote("");
     if (button) {
       button.disabled = true;
-      button.textContent = "Submitting...";
+      button.textContent = "Verifying...";
     }
 
     try {
+      payload.turnstile_token = await turnstileGuard.tokenFor(form);
+      if (!payload.turnstile_token) throw new Error("Verification challenge failed");
+      if (button) button.textContent = "Submitting...";
+
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -247,16 +341,16 @@
 
       if (res.ok && data.ok) {
         form.reset();
-        if (window.turnstile) window.turnstile.reset();
+        turnstileGuard.reset(form);
         setNote("Thanks! Check your inbox for next steps.");
       } else {
-        if (window.turnstile) window.turnstile.reset();
+        turnstileGuard.reset(form);
         setNote(`Error: ${data.error || "Request failed"}`, false);
       }
     } catch (err) {
       console.error("Network error:", err);
-      if (window.turnstile) window.turnstile.reset();
-      setNote("Network error. Please try again.", false);
+      turnstileGuard.reset(form);
+      setNote(err.message || "Network error. Please try again.", false);
     } finally {
       if (button) {
         button.disabled = false;

@@ -7,7 +7,6 @@
     <title>Liazon | Contact</title>
     <meta name="description" content="Contact Liazon for inquiries." />
     <link rel="canonical" href="https://www.liazon.ai/contact/" />
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -95,7 +94,7 @@
             <textarea name="message" rows="4" required></textarea>
           </label>
           <div class="turnstile-wrap">
-            <div class="cf-turnstile" data-sitekey="__TURNSTILE_SITE_KEY__"></div>
+            <div class="turnstile-widget" data-sitekey="__TURNSTILE_SITE_KEY__"></div>
           </div>
           <button class="button" type="submit">Send message</button>
           <p class="form-note" id="form-note" aria-live="polite"></p>
