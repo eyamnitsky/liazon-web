@@ -41,7 +41,7 @@ jobs:
             --region "$REGION" \
             --query "$GROUP_QUERY" \
             --output text || true)
-          read -r -a GROUPS <<< "$groups_text"
+          read -r -a GROUPS <<< "$groups_text" || true
 
           if [ "${#GROUPS[@]}" -eq 0 ] || [ -z "${GROUPS[0]:-}" ]; then
             echo "No matching CloudWatch log groups found."
