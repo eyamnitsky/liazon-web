@@ -138,12 +138,9 @@ const turnstileGuard = (() => {
     return form.querySelector(".turnstile-widget");
   }
 
-  async function tokenFor(form) {
+  async function renderFor(form) {
     const container = containerFor(form);
     if (!container) throw new Error("Verification widget is missing");
-
-    const existingToken = container.dataset.token || "";
-    if (existingToken) return existingToken;
 
     const turnstile = await load();
     const sitekey = container.dataset.sitekey;
@@ -155,7 +152,7 @@ const turnstileGuard = (() => {
       const widgetId = turnstile.render(container, {
         sitekey,
         execution: "execute",
-        appearance: "interaction-only",
+        appearance: "always",
         callback(token) {
           container.dataset.token = token || "";
           if (container.__turnstileResolve) container.__turnstileResolve(token || "");
@@ -172,6 +169,14 @@ const turnstileGuard = (() => {
       });
       container.dataset.widgetId = widgetId;
     }
+
+    return { container, turnstile };
+  }
+
+  async function tokenFor(form) {
+    const { container, turnstile } = await renderFor(form);
+    const existingToken = container.dataset.token || "";
+    if (existingToken) return existingToken;
 
     return new Promise((resolve, reject) => {
       const timeout = window.setTimeout(() => {
@@ -191,6 +196,21 @@ const turnstileGuard = (() => {
     });
   }
 
+  function prepare(form) {
+    const container = containerFor(form);
+    if (!container || container.dataset.prepared === "true") return;
+    container.dataset.prepared = "true";
+
+    const start = () => {
+      renderFor(form).catch((err) => {
+        console.error("Verification setup error:", err);
+      });
+    };
+
+    form.addEventListener("focusin", start, { once: true });
+    form.addEventListener("pointerdown", start, { once: true });
+  }
+
   function reset(form) {
     const container = containerFor(form);
     if (!container) return;
@@ -200,7 +220,7 @@ const turnstileGuard = (() => {
     }
   }
 
-  return { tokenFor, reset };
+  return { prepare, tokenFor, reset };
 })();
 
 (() => {
@@ -211,6 +231,7 @@ const turnstileGuard = (() => {
   if (!form || !note) return;
 
   const button = form.querySelector("button[type='submit']");
+  turnstileGuard.prepare(form);
 
   function setNote(msg, ok = true) {
     note.textContent = msg;
@@ -290,6 +311,7 @@ const turnstileGuard = (() => {
   if (!form || !note) return;
 
   const button = form.querySelector("button[type='submit']");
+  turnstileGuard.prepare(form);
 
   function setNote(msg, ok = true) {
     note.textContent = msg;
