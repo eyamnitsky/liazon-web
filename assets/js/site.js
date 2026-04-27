@@ -186,8 +186,6 @@
 })();
 
 (() => {
-  const API_URL = "https://7ofigcp921.execute-api.us-east-1.amazonaws.com/signup";
-
   const form = document.getElementById("signup-form");
   const note = document.getElementById("signup-note");
   if (!form || !note) return;
@@ -199,59 +197,14 @@
     note.style.color = ok ? "#2e7d32" : "#b00020";
   }
 
-  function valueOf(name) {
-    const el = form.elements && form.elements.namedItem ? form.elements.namedItem(name) : null;
-    if (el && typeof el.value === "string") return el.value;
-    return "";
+  setNote("New account creation is currently disabled.", false);
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Sign-up unavailable";
   }
 
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    const payload = {
-      company_name: valueOf("company_name").trim(),
-      name: valueOf("name").trim(),
-      email: valueOf("email").trim(),
-      phone: valueOf("phone").trim(),
-      domain: valueOf("domain").trim(),
-      website: valueOf("website").trim(), // honeypot (ok if missing)
-    };
-
-    if (!payload.company_name) return setNote("Please add your company name.", false);
-    if (!payload.name) return setNote("Please add your name.", false);
-    if (!payload.email) return setNote("Please add your email.", false);
-    if (!payload.phone) return setNote("Please add your phone number.", false);
-
-    setNote("");
-    if (button) {
-      button.disabled = true;
-      button.textContent = "Submitting…";
-    }
-
-    try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json().catch(() => ({}));
-      console.log("API status:", res.status, "body:", data);
-
-      if (res.ok && data.ok) {
-        form.reset();
-        setNote("Thanks! Check your inbox for next steps.");
-      } else {
-        setNote(`Error: ${data.error || "Request failed"}`, false);
-      }
-    } catch (err) {
-      console.error("Network error:", err);
-      setNote("Network error. Please try again.", false);
-    } finally {
-      if (button) {
-        button.disabled = false;
-        button.textContent = "Sign-up for free";
-      }
-    }
+    setNote("New account creation is currently disabled.", false);
   });
 })();
